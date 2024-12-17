@@ -1,0 +1,13 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+    body #goog-gt-banner {
+      display: none !important;
+    }
+  
+    body #goog-gt-container {
+      display: none !important;
+    }
+  }
