@@ -1,12 +1,12 @@
-import {useState} from "react";
-import {Icon} from "@iconify/react";
+import { useState } from "react";
+import { Icon } from "@iconify/react";
 import CloudinaryUpload from "../components/shared/CloudinaryUpload";
 import ImageUpload from "../components/shared/CloudinaryImage";
 import IconText from "../components/shared/IconText";
 import TextInput from "../components/shared/TextInput";
 import TextWithHover from "../components/shared/TextWithHover";
-import {makeAuthenticatedPOSTRequest} from "../utils/serverHelpers";
-import {Link, useNavigate} from "react-router-dom";
+import { makeAuthenticatedPOSTRequest } from "../utils/serverHelpers";
+import { Link, useNavigate } from "react-router-dom";
 import DropdownMenu from "../components/shared/DropdownMenu";
 import LoggedInContainer from "../containers/LoggedInContainer";
 
@@ -19,7 +19,7 @@ const UploadSong = () => {
     const navigate = useNavigate();
 
     const submitSong = async () => {
-        const data = {name, thumbnail, track: playlistUrl};
+        const data = { name, thumbnail, track: playlistUrl };
         const response = await makeAuthenticatedPOSTRequest(
             "/song/create",
             data
@@ -28,61 +28,61 @@ const UploadSong = () => {
             alert("Could not create song");
             return;
         }
-        
+
         navigate("/home");
     };
 
     return (
         <LoggedInContainer curActiveScreen="upload">
-                <div className="content p-8 pt-0 overflow-auto">
-                    <div className="text-2xl font-semibold mb-5 text-white mt-8">
-                        Upload Your Music
+            <div className="content p-8 pt-0 overflow-auto">
+                <div className="text-2xl font-semibold mb-5 text-white mt-8">
+                    Upload Your Music
+                </div>
+                <div className="w-full md:w-2/3 flex flex-col md:flex-row space-x-0 md:space-x-3">
+                    <div className="w-full md:w-1/2">
+                        <TextInput
+                            label="Name"
+                            labelClassName={"text-white"}
+                            placeholder="Song Name"
+                            value={name}
+                            setValue={setName}
+                        />
                     </div>
-                    <div className="w-2/3 flex space-x-3">
-                        <div className="w-1/2">
-                            <TextInput
-                                label="Name"
-                                labelClassName={"text-white"}
-                                placeholder="Name"
-                                value={name}
-                                setValue={setName}
-                            />
-                        </div>
-                        <div className="w-1/2 py-7">
-                        
-                        </div>
-                    </div>
-                    <div className="py-5 space-x-5 space-y-5">
-                    {thumbnailname ? (
-                            <div className="bg-white rounded-full pl-5 p-3 w-1/3">
-                                {thumbnailname.substring(0, 35)}...
-                            </div>
-                        ) : (
-                            <ImageUpload
-                                setUrl={setThumbnail}
-                                setName={setThumbnailname}
-                            />
-                        )}
-
-                        {uploadedSongFileName ? (
-                            <div className="bg-white rounded-full p-3 w-1/3">
-                                {uploadedSongFileName.substring(0, 35)}...
-                            </div>
-                        ) : (
-                            <CloudinaryUpload
-                                setUrl={setPlaylistUrl}
-                                setName={setUploadedSongFileName}
-                            />
-                        )}
-                    </div>
-                    <div
-                        className="bg-white w-40 flex items-center justify-center p-4 rounded-full cursor-pointer font-semibold"
-                        onClick={submitSong}
-                    >
-                        Submit Song
+                    <div className="w-full md:w-1/2 py-7">
+                        {/* Placeholder for any additional input fields in the future */}
                     </div>
                 </div>
-                </LoggedInContainer>    
+                <div className="py-5 space-x-0 md:space-x-5 space-y-5">
+                    {thumbnailname ? (
+                        <div className="bg-white rounded-full pl-5 p-3 w-full md:w-1/3">
+                            {thumbnailname.substring(0, 35)}...
+                        </div>
+                    ) : (
+                        <ImageUpload
+                            setUrl={setThumbnail}
+                            setName={setThumbnailname}
+                        />
+                    )}
+
+                    {uploadedSongFileName ? (
+                        <div className="bg-white rounded-full p-3 w-full md:w-1/3">
+                            {uploadedSongFileName.substring(0, 35)}...
+                        </div>
+                    ) : (
+                        <CloudinaryUpload
+                            setUrl={setPlaylistUrl}
+                            setName={setUploadedSongFileName}
+                        />
+                    )}
+                </div>
+                <div
+                    className="bg-white w-full md:w-40 flex items-center justify-center p-4 rounded-full cursor-pointer font-semibold"
+                    onClick={submitSong}
+                >
+                    Submit Song
+                </div>
+            </div>
+        </LoggedInContainer>
     );
 };
 

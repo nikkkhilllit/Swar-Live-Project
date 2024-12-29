@@ -31,11 +31,14 @@ const LoginComponent = () => {
     };
 
     return (
-        <div className="w-full h-full flex bg-app-black" style={{
-            backgroundImage: `url(${img})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-        }}>
+        <div
+            className="w-full h-full flex bg-app-black"
+            style={{
+                backgroundImage: `url(${img})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+            }}
+        >
             {createUnAuthModalOpen && (
                 <WrongInfoModal
                     closeModal={() => {
@@ -43,51 +46,57 @@ const LoginComponent = () => {
                     }}
                 />
             )}
-            
-            <div className="flex-1 flex justify-start items-center pl-10">
-            <div className="w-full flex flex-col">
-            <div className="logo p-5 w-1/3 flex justify-center">
-            <Icon icon="marketeq:microphone-music-2" color="black" width="40" />
-            <div className="text-4xl text-gray-400 font-teko"><Link to="/home">Swar</Link></div>
-            </div>
-                <div className="inputRegion w-1/3 py-20 flex items-center justify-center flex-col bg-black text-white p-8 rounded-lg">
-                    <div className="font-bold mb-4">
-                        To continue, log in to Swar.
-                    </div>
-                    <TextInput
-                        label="Email address"
-                        placeholder="Email address"
-                        className="my-6"
-                        value={email}
-                        setValue={setEmail}
-                    />
-                    <PasswordInput
-                        label="Password"
-                        placeholder="Password"
-                        value={password}
-                        setValue={setPassword}
-                    />
-                    <div className="w-full flex items-center justify-end my-8">
-                        <button
-                            className="bg-app-gray font-semibold p-3 px-10 rounded-full"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                login();
-                            }}
-                        >
-                            LOG IN
-                        </button>
-                    </div>
-                    <div className="w-full border border-solid border-gray-300"></div>
-                    <div className="my-6 font-semibold text-lg">
-                        Don't have an account?
-                    </div>
-                    <div className="border border-gray-300 text-gray-500 w-full flex items-center justify-center py-4 rounded-full font-bold">
-                        <Link to="/signup">SIGN UP FOR SWAR</Link>
+
+            <div className="w-full flex flex-col justify-center items-center lg:flex-row">
+                <div className="w-full lg:w-1/2 flex justify-center items-center lg:pl-10">
+                    <div className="w-1/2 flex flex-col justify-center items-center text-white lg:w-full">
+                        <div className="logo p-5 flex justify-center mb-8">
+                            <Icon icon="marketeq:microphone-music-2" color="white" width="40" />
+                            <div className="text-4xl text-gray-200 font-teko">
+                                <Link to="/home">Swar</Link>
+                            </div>
+                        </div>
+
+                        <div className="w-full max-w-md py-10 flex flex-col items-center justify-center bg-black bg-opacity-60 text-white p-8 rounded-lg">
+                            <div className="font-bold mb-4 text-xl text-center">
+                                To continue, log in to Swar.
+                            </div>
+                            <TextInput
+                                label="Email address"
+                                placeholder="Email address"
+                                className="my-6 w-full"
+                                value={email}
+                                setValue={setEmail}
+                            />
+                            <PasswordInput
+                                label="Password"
+                                placeholder="Password"
+                                className="w-full"
+                                value={password}
+                                setValue={setPassword}
+                            />
+                            <div className="w-full flex items-center justify-center my-8">
+                                <button
+                                    className="bg-app-gray font-semibold p-3 px-10 rounded-full"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        login();
+                                    }}
+                                >
+                                    LOG IN
+                                </button>
+                            </div>
+                            <div className="w-full border border-solid border-gray-300"></div>
+                            <div className="my-6 font-semibold text-lg text-center">
+                                Don't have an account?
+                            </div>
+                            <div className="border border-gray-300 text-gray-500 w-full flex items-center justify-center py-4 rounded-full font-bold">
+                                <Link to="/signup">SIGN UP FOR SWAR</Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     );
 };

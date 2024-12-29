@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoggedInContainer from "../containers/LoggedInContainer";
 
@@ -110,7 +111,7 @@ const Home = () => {
         </LoggedInContainer>
     );
 };
-<div className="flex-1 flex justify-start items-center"></div>
+
 const PlaylistView = ({ titleText, cardsData }) => {
     return (
         <div className="text-white mt-8">
@@ -147,6 +148,44 @@ const Card = ({ title, description, imgUrl, route }) => {
             </div>
             <div className="text-white font-semibold py-3">{title}</div>
             <div className="text-gray-500 text-sm">{description}</div>
+        </div>
+    );
+};
+
+const Sidebar = ({ isOpen, closeSidebar }) => (
+    <div
+        className={`fixed top-0 left-0 w-64 h-full bg-gray-800 transition-transform ${isOpen ? "transform-none" : "-translate-x-full"}`}
+    >
+        <div className="p-5">
+            <button onClick={closeSidebar} className="text-white text-2xl">X</button>
+        </div>
+        <div className="text-white p-5">
+            <ul>
+                <li><a href="#" className="block py-2">Home</a></li>
+                <li><a href="#" className="block py-2">Trending</a></li>
+                <li><a href="#" className="block py-2">Desi HipHop</a></li>
+                <li><a href="#" className="block py-2">Bollywood</a></li>
+            </ul>
+        </div>
+    </div>
+);
+
+const Navbar = () => {
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+    const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+
+    return (
+        <div className="flex justify-between items-center bg-gray-900 p-4 text-white">
+            <div className="text-2xl">Logo</div>
+            <div className="block lg:hidden" onClick={toggleSidebar}>
+                <div className="space-y-2">
+                    <div className="w-8 h-1 bg-white"></div>
+                    <div className="w-8 h-1 bg-white"></div>
+                    <div className="w-8 h-1 bg-white"></div>
+                </div>
+            </div>
+            <Sidebar isOpen={isSidebarOpen} closeSidebar={toggleSidebar} />
         </div>
     );
 };
