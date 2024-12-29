@@ -17,13 +17,11 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 8080;
 
-app.use(cors(
-    {
-        origin : ["https://deploy-mern-1whq.vercel.app"],
-        methos: ["POST","GET"],
-        credentials: true
-    }
-));
+app.use(cors({
+    origin: 'http://localhost:3000', // Allow only your frontend
+    methods: ['GET', 'POST'],       // Allowed HTTP methods
+    credentials: true,              // Include credentials like cookies
+}));
 app.use(express.json());
 
 // connect mongodb to our node app.
