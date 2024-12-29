@@ -18,7 +18,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 app.use(cors({
-    origin: 'http://localhost:3000', // Allow only your frontend
+    origin: 'https://swarmusic.onrender.com', // Allow only your frontend
     methods: ['GET', 'POST'],       // Allowed HTTP methods
     credentials: true,              // Include credentials like cookies
 }));
