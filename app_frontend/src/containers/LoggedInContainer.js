@@ -19,21 +19,13 @@ import img5 from "../assets/images/badshah.jpg";
 import About from "../routes/About";
 
 const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
-    const [createPlaylistModalOpen, setCreatePlaylistModalOpen] =
-        useState(false);
+    const [createPlaylistModalOpen, setCreatePlaylistModalOpen] = useState(false);
     const [addToPlaylistModalOpen, setAddToPlaylistModalOpen] = useState(false);
 
     const [currentProgress, setCurrentProgress] = useState(0);
     const [totalDuration, setTotalDuration] = useState(0);
 
-    const {
-        currentSong,
-        setCurrentSong,
-        soundPlayed,
-        setSoundPlayed,
-        isPaused,
-        setIsPaused,
-    } = useContext(songContext);
+    const { currentSong, setCurrentSong, soundPlayed, setSoundPlayed, isPaused, setIsPaused } = useContext(songContext);
 
     const firstUpdate = useRef(true);
 
@@ -55,10 +47,7 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
         const songId = currentSong._id;
 
         const payload = { playlistId, songId };
-        const response = await makeAuthenticatedPOSTRequest(
-            "/playlist/add/song",
-            payload
-        );
+        const response = await makeAuthenticatedPOSTRequest("/playlist/add/song", payload);
         if (response._id) {
             setAddToPlaylistModalOpen(false);
         }
@@ -128,7 +117,7 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
         window.location.reload();
     };
 
-    const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false); // Mobile sidebar state
 
     return (
         <div className="h-full w-full bg-app-black">
@@ -148,11 +137,9 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
                 />
             )}
             <div className={`${currentSong ? "h-9/10" : "h-full"} w-full flex`}>
-                {/* Sidebar */}
+                {/* Left Sidebar for mobile */}
                 <div
-                    className={`h-full w-1/5 bg-app-black flex flex-col justify-between pb-10 transform transition-transform duration-300 ease-in-out ${
-                        isSidebarVisible ? "translate-x-0" : "-translate-x-full"
-                    } sm:translate-x-0 sm:w-1/5`}
+                    className={`h-full bg-app-black flex flex-col justify-between pb-10 w-1/5 ${sidebarOpen ? "fixed left-0" : "hidden sm:block"}`}
                     style={{
                         backgroundImage: `url(${img})`,
                         backgroundSize: 'cover',
@@ -160,45 +147,21 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
                     }}
                 >
                     <div>
-                        {/* Logo Section */}
+                        {/* Logo */}
                         <div className="logoDiv p-6 flex" onClick={refreshPage}>
                             <Icon icon="marketeq:microphone-music-2" color="orange" width="40" />
-                            <div className="text-4xl text-gray-400 font-teko"><Link to="/home">Swar</Link></div>
+                            <div className="text-4xl text-gray-400 font-teko">
+                                <Link to="/home">Swar</Link>
+                            </div>
                         </div>
                         <div className="py-5">
-                            <IconText
-                                iconName={"fluent:home-20-filled"}
-                                displayText={"Home"}
-                                targetLink={"/home"}
-                                active={curActiveScreen === "home"}
-                            />
-                            <IconText
-                                iconName={"charm:search"}
-                                displayText={"Search"}
-                                active={curActiveScreen === "search"}
-                                targetLink={"/search"}
-                            />
+                            <IconText iconName={"fluent:home-20-filled"} displayText={"Home"} targetLink={"/home"} active={curActiveScreen === "home"} />
+                            <IconText iconName={"charm:search"} displayText={"Search"} active={curActiveScreen === "search"} targetLink={"/search"} />
                         </div>
                         <div className="pt-5">
-                            <IconText
-                                iconName={"ion:library"}
-                                displayText={"Library"}
-                                active={curActiveScreen === "library"}
-                                targetLink={"/library"}
-                            />
-                            <IconText
-                                iconName={"iconamoon:music-album"}
-                                displayText={"My Music"}
-                                targetLink={"/myMusic"}
-                                active={curActiveScreen === "myMusic"}
-                            />
-                            <IconText
-                                iconName={"ic:baseline-add-box"}
-                                displayText={"Create Playlist"}
-                                onClick={() => {
-                                    setCreatePlaylistModalOpen(true);
-                                }}
-                            />
+                            <IconText iconName={"ion:library"} displayText={"Library"} active={curActiveScreen === "library"} targetLink={"/library"} />
+                            <IconText iconName={"iconamoon:music-album"} displayText={"My Music"} targetLink={"/myMusic"} active={curActiveScreen === "myMusic"} />
+                            <IconText iconName={"ic:baseline-add-box"} displayText={"Create Playlist"} onClick={() => { setCreatePlaylistModalOpen(true); }} />
                         </div>
                     </div>
                     <div className="px-5">
@@ -207,45 +170,30 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
                         </div>
                     </div>
                 </div>
-
-                {/* Main Content */}
+                {/* Right Content Area (Main Content) */}
                 <div className="h-full w-4/5 bg-app-gray overflow-auto">
                     <div className="navbar w-full h-1/10 bg-app-black flex items-center justify-end">
                         <div className="w-1/3 h-2/3 flex justify-start items-center overflow-hidden">
-                            <a href={currentImage.link} target="_blank" rel="noopener noreferrer">
-                                <img
-                                    src={currentImage.src}
-                                    alt="Description"
-                                    className="h-full max-w-full object-contain"
-                                />
-                            </a>
+                            {sidebarOpen && (
+                                <a href={currentImage.link} target="_blank" rel="noopener noreferrer">
+                                    <img
+                                        src={currentImage.src}
+                                        alt="Description"
+                                        className="h-full max-w-full object-contain"
+                                    />
+                                </a>
+                            )}
                         </div>
 
                         <div className="w-1/2 flex h-full">
                             <div className="w-2/3 flex justify-around items-center">
-                                <IconText
-                                    displayText={"About"}
-                                    targetLink="/aboutus"
-                                    active={curActiveScreen === "about"}
-                                />
-                                <IconText
-                                    displayText={"Description"}
-                                    targetLink="/description"
-                                    active={curActiveScreen === "description"}
-                                />
-                                <IconText
-                                    displayText={"Copyright"}
-                                    targetLink="/copyright"
-                                    active={curActiveScreen === "copyright"}
-                                />
+                                <IconText displayText={"About"} targetLink="/aboutus" active={curActiveScreen === "about"} />
+                                <IconText displayText={"Description"} targetLink="/description" active={curActiveScreen === "description"} />
+                                <IconText displayText={"Copyright"} targetLink="/copyright" active={curActiveScreen === "copyright"} />
                                 <div className="h-1/2 border-r border-white"></div>
                             </div>
                             <div className="w-1/3 flex justify-around h-full items-center">
-                                <IconText
-                                    displayText={"Upload Song"}
-                                    targetLink="/uploadsong"
-                                    active={curActiveScreen === "upload"}
-                                />
+                                <IconText displayText={"Upload Song"} targetLink="/uploadsong" active={curActiveScreen === "upload"} />
                                 <div className="relative bg-white w-10 h-10 flex items-center justify-center rounded-full font-semibold cursor-pointer">
                                     <DropdownMenu />
                                 </div>
@@ -258,26 +206,24 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
                     </div>
                 </div>
             </div>
-
-            {/* Current Playing Song */}
+            {/* Bottom Player Bar */}
             {currentSong && (
                 <div className="w-2/9 h-1/10 bg-app-black bg-opacity-30 text-white flex items-center px-4">
                     <div className="w-full flex items-center">
                         <img
                             src={currentSong.thumbnail}
-                            alt="currentSongThumbnail"
+                            alt="currentSongThumbail"
                             className="h-14 w-14 rounded"
                         />
                         <div className="pl-4">
-                            <div className="text-sm hover:underline cursor-pointer">
-                                {currentSong.name}
-                            </div>
-                            <div className="text-xs text-gray-500 hover:underline cursor-pointer">
-                                {currentSong.artist.firstName + " " + currentSong.artist.lastName}
-                            </div>
+                            <div className="text-sm hover:underline cursor-pointer">{currentSong.name}</div>
+                            <div className="text-xs text-gray-500 hover:underline cursor-pointer">{currentSong.artist.firstName + " " + currentSong.artist.lastName}</div>
                         </div>
-                        <div className="pl-20 pr-10 flex items-center justify-center space-x-10"></div>
+                        <div className="pl-20 pr-10 flex items-center justify-center space-x-10">
+                            {/* Add controls here if needed */}
+                        </div>
                     </div>
+
                     <div className="w-1/4 flex justify-end pr-4 space-x-10 items-center">
                         <Icon
                             icon={isPaused ? "ic:baseline-play-circle" : "ic:baseline-pause-circle"}
@@ -302,6 +248,15 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
                     </div>
                 </div>
             )}
+            {/* Mobile Menu Toggle */}
+            <div className="sm:hidden absolute top-4 left-4">
+                <Icon
+                    icon="eva:menu-fill"
+                    fontSize={40}
+                    className="text-white"
+                    onClick={() => setSidebarOpen(!sidebarOpen)}
+                />
+            </div>
         </div>
     );
 };
