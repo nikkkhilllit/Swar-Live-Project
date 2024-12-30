@@ -324,7 +324,7 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
 
             {/* This div is the current playing song */}
 {currentSong && (
-    <div className="w-2/9 h-1/10 bg-app-black bg-opacity-30 text-white flex items-center px-4">
+    <div className="w-2/9 h-1/10 bg-black  text-white flex items-center px-4">
         <div className="w-full flex items-center">
             <img
                 src={currentSong.thumbnail}
@@ -342,12 +342,41 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
             <div className="pl-20 pr-10 flex items-center justify-center space-x-10">
             
             </div>
+            {/* Icons for Mobile - Horizontal Layout */}
+            <div className="block sm:hidden flex items-center justify-between space-x-6 px-4">
+                <div className="">
+                <Icon
+        icon={ "mdi:square"}
+        fontSize="40"
+        className="cursor-pointer text-black"
+        
+    />
+                </div>
+    <Icon
+        icon={isPaused ? "ic:baseline-play-circle" : "ic:baseline-pause-circle"}
+        fontSize="40"
+        className="cursor-pointer text-gray-500 hover:text-white"
+        onClick={togglePlayPause}
+    />
+    <Icon
+        icon="ic:round-playlist-add"
+        fontSize="30"
+        className="cursor-pointer text-gray-500 hover:text-white"
+        onClick={() => setAddToPlaylistModalOpen(true)}
+    />
+    <Icon
+        icon="basil:cross-outline"
+        fontSize="35"
+        className="cursor-pointer text-gray-500 hover:text-white"
+        onClick={refreshPage}
+    />
+</div>
         </div>
         
-        <div className="w-1/4 flex justify-end pr-4 space-x-10 items-center justify-center">
+        <div className="w-1/4 flex justify-end pr-4 space-x-10 ">
             
             {/* Icons for PC - Horizontal Layout */}
-            <div className="hidden sm:flex space-x-6">
+            <div className="hidden sm:flex space-x-6 items-center justify-center">
                 <Icon
                     icon={isPaused ? "ic:baseline-play-circle" : "ic:baseline-pause-circle"}
                     fontSize="50"
@@ -368,27 +397,8 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
                 />
             </div>
 
-            {/* Icons for Mobile - Horizontal Layout */}
-            <div className="block sm:hidden flex space-x-4 items-center justify-center pr-8">
-                <Icon
-                    icon={isPaused ? "ic:baseline-play-circle" : "ic:baseline-pause-circle"}
-                    fontSize="40"
-                    className="cursor-pointer text-gray-500 hover:text-white"
-                    onClick={togglePlayPause}
-                />
-                <Icon
-                    icon="ic:round-playlist-add"
-                    fontSize="30"
-                    className="cursor-pointer text-gray-500 hover:text-white"
-                    onClick={() => setAddToPlaylistModalOpen(true)}
-                />
-                <Icon
-                    icon="basil:cross-outline"
-                    fontSize="35"
-                    className="cursor-pointer text-gray-500 hover:text-white"
-                    onClick={refreshPage}
-                />
-            </div>
+            
+
         </div>
     </div>
 )}
