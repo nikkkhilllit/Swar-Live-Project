@@ -72,7 +72,7 @@ function App() {
                 ) : (
                     // logged out routes
                     <Routes>
-                        <Route path="/home" element={<HomeComponent />} />
+                        {/* <Route path="/home" element={<HomeComponent />} /> */}
                         <Route path="/login" element={<LoginComponent />} />
                         <Route path="/signup" element={<SignupComponent />} />
                         <Route path="*" element={<Navigate to="/login" />} />

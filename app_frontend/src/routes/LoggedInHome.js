@@ -115,7 +115,7 @@ const PlaylistView = ({ titleText, cardsData }) => {
     return (
         <div className="text-white mt-8">
             <div className="text-2xl font-semibold mb-5">{titleText}</div>
-            <div className="grid grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
                 {cardsData.map((item) => (
                     <Card
                         key={item.title}
@@ -129,6 +129,7 @@ const PlaylistView = ({ titleText, cardsData }) => {
         </div>
     );
 };
+
 
 const Card = ({ title, description, imgUrl, route }) => {
     const navigate = useNavigate();
