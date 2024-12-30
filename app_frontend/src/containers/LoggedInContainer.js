@@ -344,7 +344,7 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
             <div className="block sm:hidden flex items-center justify-between space-x-6 px-4">
             <Icon
         icon={"mdi:square"}
-        fontSize="20"
+        fontSize="10"
         className="cursor-pointer text-black"
         
     />
