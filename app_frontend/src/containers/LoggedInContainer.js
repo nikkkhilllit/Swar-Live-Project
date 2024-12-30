@@ -339,9 +339,7 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
                     {currentSong.artist.firstName + " " + currentSong.artist.lastName}
                 </div>
             </div>
-            <div className="pl-20 pr-10 flex items-center justify-center space-x-10">
-            
-            </div>
+           
             {/* Icons for Mobile - Horizontal Layout */}
             <div className="block sm:hidden flex items-center justify-between space-x-6 px-4">
                 
