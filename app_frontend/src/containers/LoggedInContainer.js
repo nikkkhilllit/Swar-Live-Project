@@ -324,7 +324,7 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
 
             {/* This div is the current playing song */}
 {currentSong && (
-    <div className="w-2/9 h-1/10 bg-app-black bg-opacity-30 text-white flex items-center px-4">
+    <div className="w-2/9 h-1/10 bg-black text-white flex items-center px-4">
         <div className="w-full flex items-center">
             <img
                 src={currentSong.thumbnail}
@@ -342,7 +342,12 @@ const LoggedInContainer = ({ children, curActiveScreen, songId, artist }) => {
            
             {/* Icons for Mobile - Horizontal Layout */}
             <div className="block sm:hidden flex items-center justify-between space-x-6 px-4">
-                
+            <Icon
+        icon={"mdi:square"}
+        fontSize="40"
+        className="cursor-pointer text-black"
+        
+    />
     <Icon
         icon={isPaused ? "ic:baseline-play-circle" : "ic:baseline-pause-circle"}
         fontSize="40"
