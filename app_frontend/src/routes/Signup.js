@@ -56,12 +56,14 @@ const SignupComponent = () => {
     };
 
     return (
-        <div className="w-full h-full flex flex-col items-start pl-12 bg-app-gray overflow-auto"
+        <div
+            className="w-full h-full flex flex-col items-center sm:items-start sm:pl-12 bg-app-gray overflow-auto"
             style={{
                 backgroundImage: `url(${img})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-            }}>
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+            }}
+        >
             {createUnAuthModalOpen && (
                 <WrongInfoModal
                     closeModal={() => {
@@ -69,20 +71,21 @@ const SignupComponent = () => {
                     }}
                 />
             )}
-            <div className="logo p-5 w-full sm:w-2/5 flex justify-center">
+            {/* Logo - Hidden on Mobile */}
+            <div className="logo p-5 w-2/5 flex justify-center hidden sm:flex">
                 <Icon icon="marketeq:microphone-music-2" width="40" />
                 <div className="text-4xl text-gray-400 font-teko ml-2">
                     <Link to="/home">Swar</Link>
                 </div>
             </div>
-            <div className="inputRegion w-full sm:w-2/5 py-8 sm:py-20 p-6 sm:p-8 flex items-center justify-center bg-black text-white flex-col rounded-lg">
-                <div className="font-bold mb-4 text-2xl text-center sm:text-left">
-                    Sign up for free to start listening.
-                </div>
+
+            {/* Input Region */}
+            <div className="inputRegion w-2/5 py-20 p-8 flex items-center justify-center bg-black text-white flex-col rounded-lg sm:w-full sm:py-10">
+                <div className="font-bold mb-4 text-2xl">Sign up for free to start listening.</div>
                 <TextInput
                     label="Email address"
                     placeholder="Enter your email"
-                    className={`mt-6 ${error.email ? 'border-red-500' : ''}`}
+                    className={`mt-6 ${error.email ? "border-red-500" : ""}`}
                     value={email}
                     setValue={setEmail}
                 />
@@ -91,7 +94,6 @@ const SignupComponent = () => {
                 <TextInput
                     label="Username"
                     placeholder="Enter your username"
-                    className="mt-6"
                     value={username}
                     setValue={setUsername}
                 />
@@ -99,7 +101,7 @@ const SignupComponent = () => {
                 <PasswordInput
                     label="Create Password"
                     placeholder="Enter a strong password"
-                    className={`mb-6 ${error.confirmPassword ? 'border-red-500' : ''}`}
+                    className={`mb-6 ${error.confirmPassword ? "border-red-500" : ""}`}
                     value={password}
                     setValue={setPassword}
                 />
@@ -107,32 +109,31 @@ const SignupComponent = () => {
                 <PasswordInput
                     label="Confirm Password"
                     placeholder="Enter your password again"
-                    className={`mb-6 ${error.confirmPassword ? 'border-red-500' : ''}`}
+                    className={`mb-6 ${error.confirmPassword ? "border-red-500" : ""}`}
                     value={confirmPassword}
                     setValue={setConfirmPassword}
                 />
                 {error.confirmPassword && <div className="text-red-500 text-sm">{error.confirmPassword}</div>}
 
-                <div className="w-full flex flex-col sm:flex-row sm:space-x-4 justify-between items-center space-y-4 sm:space-y-0">
+                <div className="w-full flex justify-between items-center space-x-4">
                     <TextInput
                         label="First Name"
                         placeholder="Enter Your First Name"
-                        className="my-6 w-full sm:w-1/2"
+                        className="my-6"
                         value={firstName}
                         setValue={setFirstName}
                     />
                     <TextInput
                         label="Last Name"
                         placeholder="Enter Your Last Name"
-                        className="my-6 w-full sm:w-1/2"
+                        className="my-6"
                         value={lastName}
                         setValue={setLastName}
                     />
                 </div>
-
                 <div className="w-full flex items-center justify-center my-2">
                     <button
-                        className="bg-app-gray font-semibold p-3 px-10 rounded-full w-full sm:w-auto"
+                        className="bg-app-gray font-semibold p-3 px-10 rounded-full"
                         onClick={(e) => {
                             e.preventDefault();
                             signUp();
@@ -141,11 +142,8 @@ const SignupComponent = () => {
                         Sign Up
                     </button>
                 </div>
-
-                <div className="w-full border border-solid border-gray-300 my-6"></div>
-                <div className="my-6 font-semibold text-lg text-center sm:text-left">
-                    Already have an account?
-                </div>
+                <div className="w-full border border-solid border-gray-300"></div>
+                <div className="my-6 font-semibold text-lg">Already have an account?</div>
                 <div className="border border-gray-500 text-gray-500 w-full flex items-center justify-center py-4 rounded-full font-bold">
                     <Link to="/login">LOG IN INSTEAD</Link>
                 </div>
