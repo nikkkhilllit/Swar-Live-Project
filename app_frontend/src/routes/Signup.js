@@ -57,7 +57,7 @@ const SignupComponent = () => {
 
     return (
         <div
-            className="w-full h-full flex flex-col sm:flex-row items-center sm:items-start sm:pl-12 bg-app-gray overflow-auto"
+            className="w-full h-full flex flex-col sm:flex-row items-center sm:items-start bg-app-gray overflow-auto"
             style={{
                 backgroundImage: `url(${img})`,
                 backgroundSize: "cover",
@@ -71,16 +71,19 @@ const SignupComponent = () => {
                     }}
                 />
             )}
-            {/* Logo - Hidden on Mobile */}
-            <div className="logo p-5 sm:w-2/5 flex justify-center hidden sm:flex">
-                <Icon icon="marketeq:microphone-music-2" width="40" />
-                <div className="text-4xl text-gray-400 font-teko ml-2">
-                    <Link to="/home">Swar</Link>
+
+            {/* Logo Section */}
+            <div className="logo p-5 sm:w-2/5 hidden sm:block">
+                <div className="flex items-center">
+                    <Icon icon="marketeq:microphone-music-2" width="40" />
+                    <div className="text-4xl text-gray-400 font-teko ml-2">
+                        <Link to="/home">Swar</Link>
+                    </div>
                 </div>
             </div>
 
             {/* Input Region */}
-            <div className="w-full sm:w-2/5 py-20 p-8 flex items-center justify-center bg-black text-white flex-col rounded-lg sm:rounded-none">
+            <div className="w-full sm:w-2/5 py-20 px-8 flex items-center justify-center bg-black text-white flex-col">
                 <div className="font-bold mb-4 text-2xl">Sign up for free to start listening.</div>
                 <TextInput
                     label="Email address"
